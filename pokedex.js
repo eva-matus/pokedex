@@ -1,19 +1,17 @@
+//esto me cargar el documento en el DOM para ser manipulado
 document.addEventListener('DOMContentLoaded', function(){
 
     function show_result(response){
-
         response.results.forEach(function(pokemon){           
             $('#cards').append(`<div class="card container" style="width: 18rem;">
-                                    <div class="card-body">
-                                       <h5 class="card-title">${pokemon.name}</h5>
-                                       <button id='more-info' class="boton-quiero" data-info=${pokemon.url} data-name=${pokemon.name}>¡Quiero saber más de este pokémon!</button>
+                                <div class="card-body">
+                                <h5 class="card-title">${pokemon.name}</h5>
+                                <button id='more-info' class="boton-quiero" data-info=${pokemon.url} data-name=${pokemon.name}>¡Quiero saber más de este pokémon!</button>
                                     </div>
-                                </div>`)
-               
+                                </div>`)               
         })
         var button = $('#next-button')
-        button.attr('data-next', response.next)  
-
+        button.attr('data-next', response.next)
     }
 
     function show_info (response) {
@@ -48,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function(){
     var promise = $.ajax(baseURL)
         promise.done(show_result)
 
-
     $('#cards').on('click', function (event) {
         if (event.target.dataset.info){
             var pokemonName = event.target.dataset.name
@@ -60,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
     $('#next-button').on('click', function(){
         var nextURL = $('#next-button').attr('data-next')
-        $.ajax(nextURL).done(show_result)
-       
+        $.ajax(nextURL).done(show_result) 
     })
 });
